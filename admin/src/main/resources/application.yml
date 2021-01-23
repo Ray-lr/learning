@@ -1,0 +1,66 @@
+server:
+  # 服务端口号
+  port: 8082
+
+#  devtools
+debug: true
+spring:
+  devtools:
+    restart:
+      enabled: true
+  application:
+    # 服务名称 - 服务之间使用名称进行通讯
+    name: service-admin
+  #jdbc
+  datasource:
+    type: com.mysql.cj.jdbc.MysqlConnectionPoolDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/teacher?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+    #druid properties
+    druid:
+      stat-view-servlet:
+        login-username: admin
+        login-password: admin
+        enabled: true
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      max-wait: 60000
+      max-evictable-idle-time-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      time-between-eviction-runs-millis: 60000
+      db-type: mysql
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      filter:
+        stat:
+          log-slow-sql: true
+      filters: stat,wall
+      validation-query: SELECT 1 FROM DUAL
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.teacher.admin.entity
+ #开启驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+
+# eureka
+eureka:
+  client:
+    service-url:
+      # 填写注册中心服务器地址
+      defaultZone: http://localhost:8081/eureka
+    # 是否需要将自己注册到注册中心
+    register-with-eureka: true
+    # 是否需要搜索服务信息
+    fetch-registry: true
+  instance:
+    # 使用ip地址注册到注册中心
+    prefer-ip-address: true
+    # 注册中心列表中显示的状态参数
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
