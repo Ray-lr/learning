@@ -1,6 +1,7 @@
 package com.teacher.admin.config;
 
 
+import lombok.SneakyThrows;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,9 +18,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
 {
+    @SneakyThrows
     @Override
-    protected void configure(final HttpSecurity http) throws Exception
-    {
-        http.csrf().ignoringAntMatchers("/druid/*");
+    protected void configure(HttpSecurity http){
+//        http.csrf().ignoringAntMatchers("/druid/*");
+        http.csrf().disable();
     }
 }

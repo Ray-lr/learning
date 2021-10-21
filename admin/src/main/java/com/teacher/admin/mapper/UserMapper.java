@@ -1,6 +1,6 @@
 package com.teacher.admin.mapper;
 
-import com.teacher.admin.config.BaseMapper;
+import com.teacher.admin.config.MyBaseMapper;
 import com.teacher.admin.entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  *description: user mapper
  ***/
 @Repository
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends MyBaseMapper<User> {
 }

@@ -40,6 +40,9 @@ spring:
           log-slow-sql: true
       filters: stat,wall
       validation-query: SELECT 1 FROM DUAL
+#  默认是拦截/login请求的,改为true放行
+  mvc:
+    log-request-details: true
 
 # mybatis
 mybatis:
